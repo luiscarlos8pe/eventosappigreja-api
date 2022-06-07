@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de eventos</title>
+<head>
+<title>IgrejasApp</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+<link rel="stylesheet" href="style/styleCss.css"/>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Lista de igrejas</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/cadastrarIgreja" class="waves-effect waves-light btn"><i
+			class="material-icons left">add_circle_outline</i>Cadastrar igrejas</a></li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
+
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Igreja:</th>
+				<th>Pastor:</th>
+				<th>Bairro:</th>
+				<th>Rua:</th>
+				<th>Numero:</th>
+				<th>Deletar:</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="igreja : ${igreja}">
+				<td><a th:href="${(#mvc.url('IC#detalheIgreja').arg(0, igreja.codigo)).build()}"><span th:text="${igreja.nome}"></span></a></td>
+				<td><span th:text="${igreja.pastor}"></span></td>
+				<td><span th:text="${igreja.bairro}"></span></td>
+				<td><span th:text="${igreja.rua}"></span></td>
+				<td><span th:text="${igreja.numero}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('IC#deletarIgreja').arg(0, igreja.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

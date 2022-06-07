@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR" 
+	  xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igreja:</title>
+    
+     <head>
+<title>IgrejasApp</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="style/styleCss.css"/>
+</head>
+<body>
+
+	 <header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Eventos</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/igrejas" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Lista de igrejas:</a></li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+    
+   
+   		<div th:each="igreja: ${igreja}" class="container detalhesEvento" >
+   		
+   			<div class="row" >
+   			
+   					<p>Igreja: <span th:text="${igreja.nome}"></span></p>
+		   			<p>Pastor: <span th:text="${igreja.pastor}"></span></p>
+		   			<p>Bairro: <span th:text="${igreja.bairro}"></span></p>
+		   			<p>Rua: <span th:text="${igreja.rua}"></span></p>
+		   			<p>Numero: <span th:text="${igreja.numero}"></span></p>
+		   	</div>
+		  
+   		</div>
+ 			 
+   				<th:block th:include="mensagemValidacao"></th:block>
+  			<div class="container formEvento">
+  				
+	  			<form class="row" method="post">
+	  			
+		  				Nome evento:<input type="text" value="" name="nomeEvento"/>
+		  			<div class="input-field col s6">
+		  				Data:<input type="date" value="" name="data"/>
+		  			</div>
+		  			<div class="input-field col s6">
+		  				Horário:<input type="time" value="" name="horario"/>
+		  			</div>
+		  			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+	  			</form>  			
+	  		</div>  
+	
+	  	<table class="container tabelaEvento">
+	  		<thead>
+	  			<th>Nome:</th>
+	  			<th>Data:</th>
+	  			<th>Horário:</th>
+	  			<th>Deletar:</th>
+	  		</thead>
+	  		<tbody>	
+	  		
+	  			<tr th:each="evento : ${eventos}">			
+   					<div class="input-field col s4"><td><span th:text="${evento.nomeEvento}"></span></td></div>
+   					<div class="input-field col s4"><td><span th:text="${evento.data}"></span></td></div>
+		   			<div class="input-field col s4"><td><span th:text="${evento.horario}"></span></td></div>
+		   			<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('IC#deletarEvento').arg(0, evento.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+	  			</tr>
+	  		</tbody>
+	</table>
+
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
